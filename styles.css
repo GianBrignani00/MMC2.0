@@ -61,6 +61,13 @@ h1,#carrito{
     padding: 10px;
 }
 
+h3{
+    text-align: center;
+}
+
+p{
+    margin: 10px;
+}
 .comida{
     width: 400px;
     height: 250px;
