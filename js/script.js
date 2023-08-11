@@ -1,4 +1,4 @@
-// Función para mostrar SweetAlert al agregar un producto al carrito
+
 function mostrarMensajeAdquisicion(producto) {
     Swal.fire({
         position: 'top-end',
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const botonesAdquirir = document.querySelectorAll('.btn.btn-primary');
     botonesAdquirir.forEach((boton, index) => {
-        boton.setAttribute('data-id', productos[index].id); // Agregamos el atributo data-id al botón
+        boton.setAttribute('data-id', productos[index].id); 
         boton.addEventListener('click', function () {
             const idProducto = parseInt(boton.getAttribute('data-id'));
             agregarAlCarro(idProducto);
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function mostrarCarrito() {
         const carritoContainer = document.getElementById('carritoContainer');
-        carritoContainer.innerHTML = ''; // Limpiamos el contenido previo
+        carritoContainer.innerHTML = ''; 
 
         const table = document.createElement('table');
         table.classList.add('table', 'table-striped');
@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
         table.appendChild(tbody);
         carritoContainer.appendChild(table);
 
-        // Mostrar el total en el carrito
         const totalContainer = document.getElementById('totalContainer');
         totalContainer.textContent = `Total: $${total}`;
     }
@@ -149,6 +148,39 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarCarrito();
     }
 
-    // Llamada inicial para mostrar el carrito al cargar la página
     mostrarCarrito();
 });
+
+const emailInput = document.getElementById('InputEmail1');
+const passwordInput = document.getElementById('InputPassword1');
+const submitButton = document.getElementById('submitButton');
+const emailError = document.getElementById('emailError');
+const passwordError = document.getElementById('passwordError');
+
+emailInput.addEventListener('input', validateForm);
+passwordInput.addEventListener('input', validateForm);
+
+function validateForm() {
+    if (!emailInput.validity.valid) {
+        emailInput.classList.add('invalid-input');
+        emailError.textContent = 'Please enter a valid email address.';
+    } else {
+        emailInput.classList.remove('invalid-input');
+        emailError.textContent = '';
+    }
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/;
+    if (!passwordPattern.test(passwordInput.value)) {
+        passwordInput.classList.add('invalid-input');
+        passwordError.textContent = 'Password must contain at least one lowercase letter, one uppercase letter, and one number.';
+    } else {
+        passwordInput.classList.remove('invalid-input');
+        passwordError.textContent = '';
+    }
+
+    if (emailInput.validity.valid && passwordPattern.test(passwordInput.value)) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true;
+    }
+}
