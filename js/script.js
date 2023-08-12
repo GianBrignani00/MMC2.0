@@ -150,37 +150,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
     mostrarCarrito();
 });
-
-const emailInput = document.getElementById('InputEmail1');
-const passwordInput = document.getElementById('InputPassword1');
-const submitButton = document.getElementById('submitButton');
-const emailError = document.getElementById('emailError');
-const passwordError = document.getElementById('passwordError');
-
-emailInput.addEventListener('input', validateForm);
-passwordInput.addEventListener('input', validateForm);
-
-function validateForm() {
-    if (!emailInput.validity.valid) {
-        emailInput.classList.add('invalid-input');
-        emailError.textContent = 'Please enter a valid email address.';
-    } else {
-        emailInput.classList.remove('invalid-input');
-        emailError.textContent = '';
-    }
-
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/;
-    if (!passwordPattern.test(passwordInput.value)) {
-        passwordInput.classList.add('invalid-input');
-        passwordError.textContent = 'Password must contain at least one lowercase letter, one uppercase letter, and one number.';
-    } else {
-        passwordInput.classList.remove('invalid-input');
-        passwordError.textContent = '';
-    }
-
-    if (emailInput.validity.valid && passwordPattern.test(passwordInput.value)) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
-    }
-}
